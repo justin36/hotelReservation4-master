@@ -56,4 +56,5 @@ public class Reservation {
                 ", checkOutDate=" + checkOutDate +
                 '}';
     }
+
 }

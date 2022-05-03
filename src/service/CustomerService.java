@@ -24,18 +24,18 @@ public class CustomerService {
         return mapOfCustomers.values();
     }
 
-//    public static void main(String[] args) {
-//        Customer joon = new Customer("Joon", "Kim", "justinkim36@naver.com");
-//
-//        ArrayList<Customer> customer = new ArrayList<Customer>();
-//        customer.add(joon);
-//
-//        for (Customer c : customer) {
-//            CustomerService.addCustomer(mapOfCustomers, c);
-//        }
-//
-//        System.out.println(getCustomer("justinkim36@naver.com"));
-//
-//        System.out.println(getAllCustomers());
-//    }
+    public static void main(String[] args) {
+        Customer joon = new Customer("Joon", "Kim", "justinkim36@naver.com");
+
+        ArrayList<Customer> customer = new ArrayList<Customer>();
+        customer.add(joon);
+
+        for (Customer c : customer) {
+            CustomerService.addCustomer(mapOfCustomers, c);
+        }
+
+        System.out.println(getCustomer("justinkim36@naver.com"));
+
+        System.out.println(getAllCustomers());
+    }
 }
