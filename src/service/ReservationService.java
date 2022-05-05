@@ -23,33 +23,60 @@ public class ReservationService {
         return mapOfRooms.values();
     }
 
-    public Collection<IRoom> findRooms(Date checkInDate, Date checkOutDate) {
-        Collection<IRoom> reservedRooms = getAllReservedRooms(checkInDate, checkOutDate);
-        Collection<IRoom> availableRooms = new LinkedList<>();
-        for (IRoom room : getAllRooms()) {
-            if(!reservedRooms.contains(room)){
-                availableRooms.add(room);
-            }
-        }
-        return availableRooms;
-    }
 
     public static Reservation reserveARoom(Customer customer, IRoom room, Date checkInDate, Date checkOutDate) {
+        if(isRoomReserved(room, checkInDate, checkOutDate)){
+            System.out.println(1);
+            return null;
+        }
+
+        System.out.println(2);
+
         Reservation reservation = new Reservation(customer, room, checkInDate, checkOutDate);
 
+        Collection<Reservation> customerReservations = getCustomerReservations(customer);
+        if(customerReservations == null){
+            customerReservations = new LinkedList<>();
+        }
+        customerReservations.add(reservation);
+        reservationInfo.put(customer.getEmail(), customerReservations);
 
+        System.out.println(reservation);
+        System.out.println(reservationInfo);
         return reservation;
     }
 
-//    private static Collection<IRoom> getAllReservedRooms(Date checkInDate, Date checkOutDate) {
-//        LinkedList<IRoom> reservedRooms = new LinkedList<>();
-//        for (Reservation reservation : printAllReservations()) {
-//            if(reservation.isRoomReserved(checkInDate, checkOutDate)){
-//                reservedRooms.add(reservation.getRoom());
-//            }
-//        }
-//        return reservedRooms;
-//    }
+    public static boolean isRoomReserved(IRoom room, Date checkInDate, Date checkOutDate) {
+        Collection<IRoom> reservedRooms = getAllReservedRooms(checkInDate, checkOutDate);
+        if(reservedRooms.contains(room)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static Collection<Reservation> getCustomerReservations(Customer customer){
+        System.out.println(reservationInfo.get(customer.getEmail()));
+        return reservationInfo.get(customer.getEmail());
+    }
+
+
+    public Collection<IRoom> findRooms(Date checkInDate, Date checkOutDate) {
+        Collection<IRoom> reservedRooms = getAllReservedRooms(checkInDate, checkOutDate);
+        Collection<IRoom> availableRooms = new LinkedList<>();
+            for (IRoom room : getAllRooms()) {
+                if(!reservedRooms.contains(room)){
+                    availableRooms.add(room);
+                }
+            }
+            return availableRooms;
+    }
+
+
+    private static Collection<IRoom> getAllReservedRooms(Date checkInDate, Date checkOutDate) {
+        LinkedList<IRoom> reservedRooms = new LinkedList<>();
+
+        return reservedRooms;
+    }
 
     public static Collection<Reservation> printAllReservations() {
         Collection<Reservation> allReservations = new LinkedList<>();
@@ -58,69 +85,24 @@ public class ReservationService {
         }
         return allReservations;
     }
-//
-//    static boolean isRoomReserved(IRoom room, Date checkInDate, Date checkOutDate) {
-//        Collection<IRoom> reservedRooms = getAllReservedRooms(checkInDate, checkOutDate);
-//        if(reservedRooms.contains(room)){
-//            return true;
-//        }
-//        return false;
-//    }
 
+    public static void main(String[] args) {
+        Date date1 = new Date(2022,04,03);
+        Date date2 = new Date(2022,04,04);
 
-//
-//    public Collection<Reservation> getCustomersReservation(Customer customer) {
-//        Collection<Reservation> customerReservation_HashSet = new HashSet<>();
-//        return null;
-//    }
+        System.out.println(date1);
 
+        Customer joon = new Customer("Joon", "Kim", "justinkim36@naver.com");
+        Room room101 = new Room("101", 100.0, RoomType.SINGLE);
 
-//    public static Date convertDateFromString(String dateString) {
-//        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-//        Date returnDate = null;
-//        try {
-//            returnDate formatter.parse(dateString);
-//        } catch(ParseException e) {
-//            e.printStackTrace();
-//        }
-//        return returnDate;
-//    }
-
-
-//    public static void main(String[] args) {
-//        Calendar calendar1 = Calendar.getInstance();
-//        Calendar calendar2 = Calendar.getInstance();
-//
-//        calendar1.set(2022, 00, 01);
-//        calendar2.set(2022, 00, 02);
-//
-//        Date date1 = calendar1.getTime();
-//        Date date2 = calendar2.getTime();
-//
-//        System.out.println(date1);
-//
-////        String date1 = "01/01/2022";
-////
-////        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(date1);
-////
-////        Date date = new Date();
-//
-//        Customer joon = new Customer("Joon", "Kim", "justinkim36@naver.com");
-//        Room room101 = new Room("101", 100.0, RoomType.SINGLE);
+        reserveARoom(joon, room101, date1, date2);
+        getCustomerReservations(joon);
 //        Reservation reservationJan1 = new Reservation(joon, room101, date1, date2);
-//
-////        mapOfRooms.put("101", room101);
-//
+
 //        ArrayList<Reservation> reservation = new ArrayList<Reservation>();
 //        reservation.add(reservationJan1);
-//
-////        for (Reservation r : reservation) {
-////            ReservationService.addRoom(mapOfRooms, r);
-////        }
-//
-////        System.out.println(getARoom("101"));
-//
-//        System.out.println(reservation);
-//    }
+
+//        System.out.println(reserveARoom());
+    }
 
 }
