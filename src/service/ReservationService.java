@@ -41,7 +41,9 @@ public class ReservationService {
         customerReservations.add(reservation);
         reservationInfo.put(customer.getEmail(), customerReservations);
 
+        System.out.println(4);
         System.out.println(reservation);
+        System.out.println(3);
         System.out.println(reservationInfo);
         return reservation;
     }
@@ -55,6 +57,8 @@ public class ReservationService {
     }
 
     public static Collection<Reservation> getCustomerReservations(Customer customer){
+        // Like the name suggests, it's getCustomerReservations, unless I put two dates on the customer it will always come out as null
+        System.out.println(5);
         System.out.println(reservationInfo.get(customer.getEmail()));
         return reservationInfo.get(customer.getEmail());
     }
@@ -83,6 +87,7 @@ public class ReservationService {
         for (Collection<Reservation> customerReservations : reservationInfo.values()) {
             allReservations.addAll(customerReservations);
         }
+        System.out.println(allReservations);
         return allReservations;
     }
 
@@ -93,10 +98,13 @@ public class ReservationService {
         System.out.println(date1);
 
         Customer joon = new Customer("Joon", "Kim", "justinkim36@naver.com");
+        Customer arthur = new Customer("Arthur", "Lau", "pauluskim0306@gmail.com");
         Room room101 = new Room("101", 100.0, RoomType.SINGLE);
 
         reserveARoom(joon, room101, date1, date2);
+        reserveARoom(arthur, room101, date1, date2);
         getCustomerReservations(joon);
+        printAllReservations();
 //        Reservation reservationJan1 = new Reservation(joon, room101, date1, date2);
 
 //        ArrayList<Reservation> reservation = new ArrayList<Reservation>();
