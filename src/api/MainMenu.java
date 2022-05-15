@@ -2,6 +2,7 @@ package api;
 
 import model.Customer;
 import service.CustomerService;
+import service.ReservationService;
 
 import java.util.Scanner;
 
@@ -90,14 +91,13 @@ public class MainMenu {
                         case 1:
                             System.out.println("See all Customers");
                             System.out.println(getAllCustomers());
+                            break;
 
 
-//                            HotelResource bookARoom();
-//                            return;
-//                        // See my reservations
+//                        // See all my Rooms
 //                        case 2:
 //                            return;
-                            // Create an Account
+                          // See all Reservations
 //                        case 3:
 //                            System.out.println("Enter email format : name@domain.com");
 //                            String email = scanner.nextLine();
@@ -113,10 +113,27 @@ public class MainMenu {
 //                            System.out.println("Welcome to the Hotel Reservation Application");
 //
 //                            break;
-//                        // Admin
-//                        case 4:
-//                            return;
-//                        // Exit
+//                        // Add a room
+                        case 4:
+                            System.out.println("Enter room number");
+                            String roomNumber = scanner.nextLine();
+
+                            System.out.println("Enter room price");
+                            double roomPrice = Double.parseDouble(scanner.nextLine());
+
+                            System.out.println("Room type: 1. Single Bed, 2. Double Bed");
+                            String roomType = scanner.nextLine();
+                            if(roomType == "1") {
+                                roomType = "Single";
+
+                            } else if (roomType == "2") {
+                                roomType = "Double";
+                            }
+
+                            ReservationService.addRoom(roomNumber, roomPrice, roomType, false);
+
+                            break;
+//                        // Back to Main Menu
 //                        case 5:
 //                            return;
 //                    }

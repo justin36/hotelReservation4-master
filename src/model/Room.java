@@ -27,6 +27,10 @@ public class Room implements IRoom {
         this.enumeration = enumeration;
     }
 
+
+
+
+
     @Override
     public String toString() {
         return "Room{" +
