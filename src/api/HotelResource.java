@@ -10,7 +10,6 @@ import java.util.Collection;
 import java.util.Date;
 
 public class HotelResource {
-
     public Customer getCustomer(String email) {
         return CustomerService.getCustomer(email);
     }
@@ -36,7 +35,4 @@ public class HotelResource {
     public Collection<IRoom> findARoom(Date checkInDate, Date checkOut){
         return ReservationService.findRooms(checkInDate, checkOut);
     }
-
-
-
 }
