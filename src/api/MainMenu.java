@@ -1,13 +1,16 @@
 package api;
 
 import model.Customer;
+import model.Room;
+import model.RoomType;
 import service.CustomerService;
 import service.ReservationService;
 
+import java.util.Objects;
 import java.util.Scanner;
 
-import static service.CustomerService.addCustomer;
-import static service.CustomerService.getAllCustomers;
+import static service.CustomerService.*;
+import static service.ReservationService.getAllRooms;
 
 public class MainMenu {
 
@@ -29,10 +32,12 @@ public class MainMenu {
                     int action = Integer.parseInt(scanner.nextLine());
 
                     switch(action) {
-//                        // Find and reserve a room
-//                        case 1:
-//                            HotelResource bookARoom();
-//                            return;
+                        // Find and reserve a room
+                        case 1:
+                            Customer customer = getCustomer(email)
+
+                            HotelResource reserveARoom();
+                            return;
 //                        // See my reservations
 //                        case 2:
 //                            return;
@@ -58,7 +63,8 @@ public class MainMenu {
                             break;
                         // Exit
                         case 5:
-                            return;
+                            keepRunning = false;
+                            break;
                     }
 
                 } catch (Exception ex) {
@@ -94,9 +100,12 @@ public class MainMenu {
                             break;
 
 
-//                        // See all my Rooms
-//                        case 2:
-//                            return;
+                        // See all my Rooms
+                        case 2:
+                            System.out.println("See all Rooms");
+                            System.out.println(getAllRooms());
+                            break;
+
                           // See all Reservations
 //                        case 3:
 //                            System.out.println("Enter email format : name@domain.com");
@@ -122,15 +131,17 @@ public class MainMenu {
                             double roomPrice = Double.parseDouble(scanner.nextLine());
 
                             System.out.println("Room type: 1. Single Bed, 2. Double Bed");
-                            String roomType = scanner.nextLine();
-                            if(roomType == "1") {
-                                roomType = "Single";
+                            String roomTypeInput = scanner.nextLine();
 
-                            } else if (roomType == "2") {
-                                roomType = "Double";
+                            RoomType roomType = null;
+                            if(Objects.equals(roomTypeInput, "1")) {
+                                roomType = RoomType.SINGLE;
+
+                            } else if (roomTypeInput == "2") {
+                                roomType = RoomType.DOUBLE;
                             }
 
-                            ReservationService.addRoom(roomNumber, roomPrice, roomType, false);
+                            ReservationService.addRoom(new Room(roomNumber, roomPrice, roomType));
 
                             break;
 //                        // Back to Main Menu
