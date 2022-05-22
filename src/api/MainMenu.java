@@ -6,6 +6,10 @@ import model.RoomType;
 import service.CustomerService;
 import service.ReservationService;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -34,17 +38,25 @@ public class MainMenu {
                     switch(action) {
                         // Find and reserve a room
                         case 1:
-                            Customer customer = getCustomer(email)
+                            System.out.println("Enter CheckIn Date mm/dd/yyyy");
 
-                            HotelResource reserveARoom();
-                            return;
+                            Date startDate = new SimpleDateFormat("mm/dd/yyyy").parse(scanner.nextLine());
+
+                            System.out.println("1");
+                            System.out.print(startDate);
+//                            System.out.println(dateTime);
+
+
+                            Customer customer = getCustomer(getUserEmail(scanner));
+
+//                            HotelResource bookARoom(customer.getEmail(), );
+                            break;
 //                        // See my reservations
 //                        case 2:
 //                            return;
                         // Create an Account
                         case 3:
-                            System.out.println("Enter email format : name@domain.com");
-                            String email = scanner.nextLine();
+                            String email = getUserEmail(scanner);
 
                             System.out.println("Enter firstName");
                             String firstName = scanner.nextLine();
@@ -155,6 +167,13 @@ public class MainMenu {
                 }
             }
         }
+    }
+
+    public String getUserEmail(Scanner scanner) {
+        System.out.println("Enter email format : name@domain.com");
+
+        return scanner.nextLine();
+
     }
 
 
