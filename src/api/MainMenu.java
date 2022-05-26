@@ -7,8 +7,6 @@ import service.CustomerService;
 import service.ReservationService;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Scanner;
@@ -44,7 +42,6 @@ public class MainMenu {
 
                             System.out.println("1");
                             System.out.print(startDate);
-//                            System.out.println(dateTime);
 
 
                             Customer customer = getCustomer(getUserEmail(scanner));
@@ -80,7 +77,7 @@ public class MainMenu {
                     }
 
                 } catch (Exception ex) {
-
+                    System.out.println("Please enter a number");
                 }
             }
         }
@@ -100,8 +97,7 @@ public class MainMenu {
                     System.out.println("2. See all Rooms");
                     System.out.println("3. See all Reservations");
                     System.out.println("4. Add a Room");
-                    System.out.println("5. Add Test Data");
-                    System.out.println("6. Back to Main Menu");
+                    System.out.println("5. Back to Main Menu");
                     int action = Integer.parseInt(scanner.nextLine());
 
                     switch (action) {
@@ -149,21 +145,20 @@ public class MainMenu {
                             if(Objects.equals(roomTypeInput, "1")) {
                                 roomType = RoomType.SINGLE;
 
-                            } else if (roomTypeInput == "2") {
+                            } else if (Objects.equals(roomTypeInput, "2")) {
                                 roomType = RoomType.DOUBLE;
                             }
 
                             ReservationService.addRoom(new Room(roomNumber, roomPrice, roomType));
 
                             break;
-//                        // Back to Main Menu
-//                        case 5:
-//                            return;
-//                    }
+                        // Back to Main Menu
+                        case 5:
+                            startAction();
+                            break;
                     }
                 } catch(Exception ex){
-
-
+                    System.out.println("Please enter a number");
                 }
             }
         }
@@ -181,8 +176,5 @@ public class MainMenu {
         MainMenu menuObject = new MainMenu();
         menuObject.startAction();
 
-
     }
-
-
 }
