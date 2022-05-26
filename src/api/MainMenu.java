@@ -1,9 +1,9 @@
 package api;
 
 import model.Customer;
+import model.IRoom;
 import model.Room;
 import model.RoomType;
-import service.CustomerService;
 import service.ReservationService;
 
 import java.text.SimpleDateFormat;
@@ -112,6 +112,10 @@ public class MainMenu {
                         case 2:
                             System.out.println("See all Rooms");
                             System.out.println(getAllRooms());
+
+                            for (IRoom IROOM : getAllRooms()) {
+                                System.out.println(IROOM);
+                            }
                             break;
 
                           // See all Reservations
